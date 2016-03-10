@@ -21,13 +21,17 @@ class HomeController extends Controller
 				$data[$i-1]['buy_current'] = $ticker['bid'];
 				$data[$i-1]['sell_current'] = $ticker['ask'];
 				$data[$i-1]['buy_four_ema'] = $ticker['buy_four_ema'];
+				$data[$i-1]['sell_four_ema'] = $ticker['sell_four_ema'];
 				
 				//compute 4-EMA diff
-				$diff = (($prevFourEMA - $ticker['buy_four_ema'])*100)/$prevFourEMA;
+				$diffBuy = (($prevBuyFourEMA - $ticker['buy_four_ema'])*100)/$prevBuyFourEMA;
+				$diffSell = (($prevBuyFourEMA - $ticker['buy_four_ema'])*100)/$prevBuyFourEMA;
 				
-				$data[$i-1]['buy_four_prcnt_diff'] = $diff;
+				$data[$i-1]['buy_four_prcnt_diff'] = $diffBuy;
+				$data[$i-1]['sell_four_prcnt_diff'] = $diffSell;
 			}
-			$prevFourEMA = $ticker['buy_four_ema'];
+			$prevBuyFourEMA = $ticker['buy_four_ema'];
+			$prevSellFourEMA = $ticker['sell_four_ema'];
 		$i++;
 		}
 		return view('home')->with('data', $data);

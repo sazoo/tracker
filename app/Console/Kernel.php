@@ -48,7 +48,7 @@ class Kernel extends ConsoleKernel
 			
 			$tickersCount = Ticker::count();
 			
-			//compute for 4-EMA
+			//compute for 4-EMA BUY
 			$fourEMA = 0;
 			if($tickersCount <= 3){
 				$t->buy_four_ema = '';
@@ -63,6 +63,43 @@ class Kernel extends ConsoleKernel
 				$fourEMA = (($t->bid - $lastTicker->buy_four_ema)*.4) + $lastTicker->buy_four_ema;
 				$t->buy_four_ema = $fourEMA;
 			}
+			
+			//compute for 4-EMA SELL
+			if($tickersCount <= 3){
+				$t->sell_four_ema = '';
+			} else if($tickersCount == 4){
+				$tickers = Ticker::orderBy('created_at', 'ASC')->get();
+				foreach($tickers as $ticker){
+					$fourEMA = $fourEMA + $ticker->bid;
+				}
+				$t->sell_four_ema = $fourEMA/4;
+			}else{
+				$lastTicker = Ticker::orderBy('created_at', 'DESC')->first();
+				$fourEMA = (($t->bid - $lastTicker->buy_four_ema)*.4) + $lastTicker->sell_four_ema;
+				$t->sell_four_ema = $fourEMA;
+			}
+			
+			//RSI
+			if(tickersCount == 0){
+				$t->gain = $t->ask;
+				$t->loss = 0;
+			}else{
+				$lastTicker = Ticker::orderBy('created_at', 'DESC')->first();
+				
+				if($t->ask > $lastTicker->ask){
+					$t->gain = $t->ask;
+				}else{
+					$t->gain = 0;
+				}
+				
+				if($t->ask > $lastTicker->ask){
+					$t->gain = 0;
+				}else{
+					$t->gain = $t->ask;
+					
+				}
+			}
+			
 			$t->save();
 			
 			$pusher = App::make('pusher');
