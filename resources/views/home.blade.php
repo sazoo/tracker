@@ -65,8 +65,8 @@
 		  <td>{{ date('m/d/Y', strtotime($d['date']))}}</td>
 		  <td>{{ date('H:i', strtotime($d['date']))}}</td>
 		  <td>{{ $d['buy_current']}}</td>
-		  <td></td>
-		  <td></td>
+		  <td>{{ $d['buy_four_ema']}}</td>
+		  <td>{{ $d['buy_four_prcnt_diff']}}</td>
 		  <td></td>
 		  <td></td>
 		  <td>{{ $d['sell_current']}}</td>
