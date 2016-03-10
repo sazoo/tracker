@@ -23,6 +23,15 @@ class CreateTickersTable extends Migration
 			$table->string('ask');
 			$table->string('open');
 			$table->string('average');
+			$table->string('buy_four_ema');
+			$table->string('buy_twenty_four_ema');
+			$table->string('sell_four_ema');
+			$table->string('sell_twenty_four_ema');
+			$table->string('gain');
+			$table->string('loss');
+			$table->string('ave_gain');
+			$table->string('ave_loss');
+			$table->string('rsi');
             $table->timestamps();
         });
     }

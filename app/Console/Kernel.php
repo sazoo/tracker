@@ -45,7 +45,25 @@ class Kernel extends ConsoleKernel
 			$t->ask = $responseArr['ask'];
 			$t->open = $responseArr['open'];
 			$t->average = $responseArr['average'];
-			//dd($t);
+			
+			$tickersCount = Ticker::count();
+			
+			//compute for 4-EMA
+			$fourEMA = 0;
+			if($tickersCount <= 3){
+				$t->buy_four_ema = '';
+			} else if($tickersCount == 4){
+				$tickers = Ticker::orderBy('created_at', 'ASC')->get();
+				foreach($tickers as $ticker){
+					$fourEMA = $fourEMA + $ticker->bid;
+				}
+				$t->buy_four_ema = $fourEMA/4;
+			}else{
+				$lastTicker = Ticker::orderBy('created_at', 'ASC')->take(2)->get();
+				foreach($tickers as $ticker){
+					$fourEMA = $fourEMA + $ticker->bid;
+				}
+			}
 			$t->save();
 			
 			$pusher = App::make('pusher');

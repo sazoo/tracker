@@ -19,6 +19,7 @@ class HomeController extends Controller
 			$data[$i]['date'] = $ticker['created_at'];
 			$data[$i]['buy_current'] = $ticker['bid'];
 			$data[$i]['sell_current'] = $ticker['ask'];
+			
 		$i++;
 		}
 		return view('home')->with('data', $data);
