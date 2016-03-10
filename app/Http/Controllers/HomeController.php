@@ -23,7 +23,7 @@ class HomeController extends Controller
 				$data[$i]['sell_four_ema'] = $ticker['sell_four_ema'];
 				
 				//compute 4-EMA diff
-				if($tickersArr->size() >= 4){
+				if(sizeOf($tickersArr) >= 4){
 					$diffBuy = (($prevBuyFourEMA - $ticker['buy_four_ema'])*100)/$prevBuyFourEMA;
 					$diffSell = (($prevBuyFourEMA - $ticker['buy_four_ema'])*100)/$prevBuyFourEMA;
 					
