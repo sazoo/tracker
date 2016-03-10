@@ -80,7 +80,7 @@ class Kernel extends ConsoleKernel
 			}
 			
 			//RSI
-			if(tickersCount == 0){
+			if($tickersCount == 0){
 				$t->gain = $t->ask;
 				$t->loss = 0;
 			}else{
