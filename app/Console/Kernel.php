@@ -59,10 +59,9 @@ class Kernel extends ConsoleKernel
 				}
 				$t->buy_four_ema = $fourEMA/4;
 			}else{
-				$lastTicker = Ticker::orderBy('created_at', 'ASC')->take(2)->get();
-				foreach($tickers as $ticker){
-					$fourEMA = $fourEMA + $ticker->bid;
-				}
+				$lastTicker = Ticker::orderBy('created_at', 'DESC')->first();
+				$fourEMA = (($t->bid - $lastTicker->buy_four_ema)*.4) + $lastTicker->buy_four_ema;
+				$t->buy_four_ema = $fourEMA;
 			}
 			$t->save();
 			
