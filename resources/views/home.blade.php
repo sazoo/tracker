@@ -37,6 +37,7 @@
 			
 	</head>	
 	<body data-color="grey" class="flat">
+	<div>
 	<table class="flat-table" id="dataTable">
 		<thead>
 			<tr>
@@ -88,5 +89,6 @@
 		@endforeach
 	  </tbody>
 	</table>
+	</div>
 	</body>
 </html>
