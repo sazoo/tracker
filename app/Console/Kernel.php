@@ -108,6 +108,6 @@ class Kernel extends ConsoleKernel
 							  'new_ticker', 
 							  array('text' => $t->toJson()));
 			
-        })->hourly();
+        })->everyFiveMinutes();
     }
 }
