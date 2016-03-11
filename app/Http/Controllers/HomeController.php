@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 class HomeController extends Controller
 {
     public function showDashboard(){		
-		$tickersArr = Ticker::orderBy('created_at', 'ASC')->take(24)->get()->toArray();
+		$tickersArr = Ticker::orderBy('created_at', 'DESC')->take(24)->get()->toArray();
 		
 		$i = 0;
 		$data = array();
@@ -43,6 +43,8 @@ class HomeController extends Controller
 			$prevSellFourEMA = $ticker['sell_four_ema'];
 		$i++;
 		}
+		
+		$data = array_reverse($data);
 		return view('home')->with('data', $data);
 	}
 }
