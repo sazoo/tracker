@@ -64,6 +64,7 @@ class Kernel extends ConsoleKernel
 				$t->buy_four_ema = $fourEMA;
 			}
 			
+			$lastTicker = Ticker::orderBy('created_at', 'DESC')->first();
 			//compute for 4-EMA SELL
 			$fourEMA = 0;
 			if($tickersCount <= 2){
@@ -75,7 +76,6 @@ class Kernel extends ConsoleKernel
 				}
 				$t->sell_four_ema = ($t->ask + $fourEMA)/4;
 			}else{
-				$lastTicker = Ticker::orderBy('created_at', 'DESC')->first();
 				$fourEMA = (($t->ask - $lastTicker->buy_four_ema)*.4) + $lastTicker->sell_four_ema;
 				$t->sell_four_ema = $fourEMA;
 			}
@@ -85,8 +85,6 @@ class Kernel extends ConsoleKernel
 				$t->gain = $t->ask;
 				$t->loss = 0;
 			}else{
-				$lastTicker = Ticker::orderBy('created_at', 'DESC')->first();
-				
 				if($t->ask > $lastTicker->ask){
 					$t->gain = $t->ask;
 				}else{
@@ -100,6 +98,15 @@ class Kernel extends ConsoleKernel
 					
 				}
 			}
+			
+			//compute diff
+			if($lastTicker->buy_four_ema != ''){
+				$t->buy_four_diff = ($t->buy_four_ema - $lastTicker->buy_four_ema)*.4) + $t->buy_four_ema;
+			}
+			if($lastTicker->sell_four_ema != ''){
+				$t->sell_four_diff = ($t->sell_four_ema - $lastTicker->sell_four_ema)*.4) + $t->sell_four_ema;
+			}
+			
 			
 			$t->save();
 			

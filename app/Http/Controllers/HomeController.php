@@ -26,21 +26,9 @@ class HomeController extends Controller
 			$data[$i]['sell_four_ema'] = $ticker['sell_four_ema'];
 			$data[$i]['gain'] = $ticker['gain'];
 			$data[$i]['loss'] = $ticker['loss'];
+			$data[$i]['buy_four_prcnt_diff'] = $ticker['buy_four_ema'];
+			$data[$i]['sell_four_prcnt_diff'] = $ticker['sell_four_ema'];;
 			
-			//compute 4-EMA diff
-			if(sizeOf($tickersArr) >= 5 && ($prevBuyFourEMA != null && $prevBuyFourEMA != '') && ($prevSellFourEMA != null && $prevSellFourEMA != '')){
-				$diffBuy = (($ticker['buy_four_ema'] - $prevBuyFourEMA)*100)/$prevBuyFourEMA;
-				$diffSell = (($ticker['buy_four_ema'] - $prevSellFourEMA)*100)/$prevSellFourEMA;
-				
-				$data[$i]['buy_four_prcnt_diff'] = $diffBuy;
-				$data[$i]['sell_four_prcnt_diff'] = $diffSell;
-			}else{
-				$data[$i]['buy_four_prcnt_diff'] = '';
-				$data[$i]['sell_four_prcnt_diff'] = '';
-			}
-			
-			$prevBuyFourEMA = $ticker['buy_four_ema'];
-			$prevSellFourEMA = $ticker['sell_four_ema'];
 		$i++;
 		}
 		
