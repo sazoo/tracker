@@ -14,7 +14,8 @@
 			  -webkit-font-smoothing: antialiased;
 			  font-size: 10px;
 			  overflow: auto;
-			  width: auto;
+			  table-layout:fixed;
+				width:100%;
 			}
 			.flat-table th {
 			  background-color: #70c469;
