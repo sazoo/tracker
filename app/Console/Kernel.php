@@ -105,7 +105,7 @@ class Kernel extends ConsoleKernel
 					$t->buy_four_diff = (($t->buy_four_ema - $lastTicker->buy_four_ema)*.4) + $t->buy_four_ema;
 				}
 				if($lastTicker->sell_four_ema != null){
-					$t->sell_four_diff = ($t->sell_four_ema - $lastTicker->sell_four_ema)*.4) + $t->sell_four_ema;
+					$t->sell_four_diff = (($t->sell_four_ema - $lastTicker->sell_four_ema)*.4) + $t->sell_four_ema;
 				}
 			}
 			
