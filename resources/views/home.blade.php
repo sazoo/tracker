@@ -37,7 +37,7 @@
 			
 	</head>	
 	<body data-color="grey" class="flat">
-	<table class="flat-table" width="100%" id="dataTable">
+	<table class="flat-table" id="dataTable">
 		<thead>
 			<tr>
 			  <th rowspan="2">Date</th>
