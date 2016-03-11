@@ -15,6 +15,9 @@ class HomeController extends Controller
 		
 		$i = 0;
 		$data = array();
+		$prevBuyFourEMA = null;
+		$prevSellFourEMA = null;
+		
 		foreach($tickersArr as $ticker){
 			$data[$i]['date'] = $ticker['created_at'];
 			$data[$i]['buy_current'] = $ticker['bid'];
@@ -27,7 +30,7 @@ class HomeController extends Controller
 			//compute 4-EMA diff
 			if(sizeOf($tickersArr) >= 4){
 				$diffBuy = (($prevBuyFourEMA - $ticker['buy_four_ema'])*100)/$prevBuyFourEMA;
-				$diffSell = (($prevBuyFourEMA - $ticker['buy_four_ema'])*100)/$prevBuyFourEMA;
+				$diffSell = (($prevSellFourEMA - $ticker['buy_four_ema'])*100)/$prevSellFourEMA;
 				
 				$data[$i]['buy_four_prcnt_diff'] = $diffBuy;
 				$data[$i]['sell_four_prcnt_diff'] = $diffSell;
@@ -35,8 +38,11 @@ class HomeController extends Controller
 				$data[$i]['buy_four_prcnt_diff'] = '';
 				$data[$i]['sell_four_prcnt_diff'] = '';
 			}
-			$prevBuyFourEMA = $ticker['buy_four_ema'];
-			$prevSellFourEMA = $ticker['sell_four_ema'];
+			
+			if(sizeOf($tickersArr) >= 3){
+				$prevBuyFourEMA = $ticker['buy_four_ema'];
+				$prevSellFourEMA = $ticker['sell_four_ema'];
+			}
 		$i++;
 		}
 		return view('home')->with('data', $data);
