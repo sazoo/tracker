@@ -67,18 +67,18 @@
 		  <td>{{ $d['buy_current']}}</td>
 		  <td>{{ $d['buy_four_ema']}}</td>
 		  <td>{{ $d['buy_four_prcnt_diff']}}</td>
-		  <td></td>
-		  <td></td>
+		  <td>{{ $d['buy_twenty_four_ema']}}</td>
+		  <td>{{ $d['buy_twenty_four_prcnt_diff']}}</td>
 		  <td>{{ $d['sell_current']}}</td>
 		  <td>{{ $d['sell_four_ema']}}</td>
 		  <td>{{ $d['sell_four_prcnt_diff']}}</td>
-		  <td></td>
-		  <td></td>
+		  <td>{{ $d['sell_twenty_four_ema']}}</td>
+		  <td>{{ $d['sell_twenty_four_prcnt_diff']}}</td>
 		  <td>{{ $d['gain']}}</td>
 		  <td>{{ $d['loss']}}</td>
-		  <td></td>
-		  <td></td>
-		  <td></td>
+		  <td>{{ $d['ave_gain']}}</td>
+		  <td>{{ $d['ave_loss']}}</td>
+		  <td>{{ $d['rsi']}}</td>
 		</tr>
 		@endforeach
 	  </tbody>

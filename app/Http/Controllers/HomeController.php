@@ -20,14 +20,25 @@ class HomeController extends Controller
 		
 		foreach($tickersArr as $ticker){
 			$data[$i]['date'] = $ticker['created_at'];
+			
 			$data[$i]['buy_current'] = $ticker['bid'];
-			$data[$i]['sell_current'] = $ticker['ask'];
 			$data[$i]['buy_four_ema'] = $ticker['buy_four_ema'];
+			$data[$i]['buy_four_prcnt_diff'] = $ticker['buy_four_diff'];
+			$data[$i]['buy_twenty_four_ema'] = $ticker['buy_twenty_four_ema'];
+			$data[$i]['buy_twenty_four_prcnt_diff'] = $ticker['buy_twenty_four_diff'];
+			
+			$data[$i]['sell_current'] = $ticker['ask'];
 			$data[$i]['sell_four_ema'] = $ticker['sell_four_ema'];
+			$data[$i]['sell_four_prcnt_diff'] = $ticker['sell_four_diff'];
+			$data[$i]['sell_twenty_four_ema'] = $ticker['sell_twenty_four_ema'];
+			$data[$i]['sell_twenty_four_prcnt_diff'] = $ticker['sell_twenty_four_diff'];
+			
 			$data[$i]['gain'] = $ticker['gain'];
 			$data[$i]['loss'] = $ticker['loss'];
-			$data[$i]['buy_four_prcnt_diff'] = $ticker['buy_four_diff'];
-			$data[$i]['sell_four_prcnt_diff'] = $ticker['sell_four_diff'];;
+			$data[$i]['ave_gain'] = $ticker['ave_gain'];
+			$data[$i]['ave_loss'] = $ticker['ave_loss'];
+			$data[$i]['rsi'] = $ticker['rsi'];
+			
 			
 		$i++;
 		}
