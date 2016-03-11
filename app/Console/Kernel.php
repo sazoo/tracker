@@ -83,7 +83,7 @@ class Kernel extends ConsoleKernel
 			//compute for 24-EMA buy
 			$twentyFourEMA = 0;
 			if($tickersCount <= 22){
-				$t->buy_four_ema = '';
+				$t->buy_twenty_four_ema = '';
 			} else if($tickersCount == 23){
 				$tickers = Ticker::orderBy('created_at', 'ASC')->get();
 				foreach($tickers as $ticker){
@@ -98,9 +98,9 @@ class Kernel extends ConsoleKernel
 			
 			//compute for 24-EMA SELL
 			$twentyFourEMA = 0;
-			if($tickersCount <= 2){
+			if($tickersCount <= 22){
 				$t->sell_twenty_four_ema = '';
-			} else if($tickersCount == 3){
+			} else if($tickersCount == 23){
 				$tickers = Ticker::orderBy('created_at', 'ASC')->get();
 				foreach($tickers as $ticker){
 					$twentyFourEMA = $twentyFourEMA + $ticker->ask;
