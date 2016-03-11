@@ -5,6 +5,9 @@
 		<meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<style>
+			table thead {
+			  position: fixed;
+			}
 			.flat-table {
 			  display: block;
 			  font-family: sans-serif;
@@ -35,31 +38,33 @@
 	</head>	
 	<body data-color="grey" class="flat">
 	<table class="flat-table" width="100%" id="dataTable">
+		<thead>
+			<tr>
+			  <th rowspan="2">Date</th>
+			  <th rowspan="2">Time</th>
+			  <th colspan="5">Buy</th>
+			  <th colspan="5">Sell</th>
+			  <th colspan="5">RSI</th>
+			</tr>
+			<tr>
+			  <th>Current</th>
+			  <th>4-EMA</th>
+			  <th>% diff</th>
+			  <th>24-EMA</th>
+			  <th>% diff</th>
+			  <th>Current</th>
+			  <th>4-EMA</th>
+			  <th>% diff</th>
+			  <th>24-EMA</th>
+			  <th>% diff</th>
+			  <th>Gain</th>
+			  <th>Loss</th>
+			  <th>Ave Gain</th>
+			  <th>Average Loss</th>
+			  <th>RSI</th>
+			</tr>
+		</thead>
 	  <tbody>
-		<tr>
-		  <th rowspan="2">Date</th>
-		  <th rowspan="2">Time</th>
-		  <th colspan="5">Buy</th>
-		  <th colspan="5">Sell</th>
-		  <th colspan="5">RSI</th>
-		</tr>
-		<tr>
-		  <th>Current</th>
-		  <th>4-EMA</th>
-		  <th>% diff</th>
-		  <th>24-EMA</th>
-		  <th>% diff</th>
-		  <th>Current</th>
-		  <th>4-EMA</th>
-		  <th>% diff</th>
-		  <th>24-EMA</th>
-		  <th>% diff</th>
-		  <th>Gain</th>
-		  <th>Loss</th>
-		  <th>Ave Gain</th>
-		  <th>Average Loss</th>
-		  <th>RSI</th>
-		</tr>
 		@foreach($data as $d)
 		<tr>
 		  <td>{{ date('m/d/Y', strtotime($d['date']))}}</td>
