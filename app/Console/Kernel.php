@@ -102,10 +102,10 @@ class Kernel extends ConsoleKernel
 			//compute diff
 			if($tickersCount > 0){
 				if($lastTicker->buy_four_ema != null){
-					$t->buy_four_diff = (($lastTicker->buy_four_ema - $t->buy_four_ema )*100)/$lastTicker->buy_four_ema;
+					$t->buy_four_diff = (($t->buy_four_ema - $lastTicker->buy_four_ema )*100)/$lastTicker->buy_four_ema;
 				}
 				if($lastTicker->sell_four_ema != null){
-					$t->sell_four_diff = (($lastTicker->sell_four_ema - $t->sell_four_ema )*100)/$lastTicker->sell_four_ema;
+					$t->sell_four_diff = (($t->sell_four_ema - $lastTicker->sell_four_ema)*100)/$lastTicker->sell_four_ema;
 				}
 			}
 			

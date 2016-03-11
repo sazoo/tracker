@@ -70,8 +70,8 @@
 		  <td></td>
 		  <td></td>
 		  <td>{{ $d['sell_current']}}</td>
-		  <td></td>
-		  <td></td>
+		  <td>{{ $d['sell_four_ema']}}</td>
+		  <td>{{ $d['sell_four_prcnt_diff']}}</td>
 		  <td></td>
 		  <td></td>
 		  <td>{{ $d['gain']}}</td>
