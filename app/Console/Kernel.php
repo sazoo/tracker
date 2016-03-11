@@ -71,12 +71,12 @@ class Kernel extends ConsoleKernel
 			} else if($tickersCount == 3){
 				$tickers = Ticker::orderBy('created_at', 'ASC')->get();
 				foreach($tickers as $ticker){
-					$fourEMA = $fourEMA + $ticker->bid;
+					$fourEMA = $fourEMA + $ticker->ask;
 				}
-				$t->sell_four_ema = ($t->bid + $fourEMA)/4;
+				$t->sell_four_ema = ($t->ask + $fourEMA)/4;
 			}else{
 				$lastTicker = Ticker::orderBy('created_at', 'DESC')->first();
-				$fourEMA = (($t->bid - $lastTicker->buy_four_ema)*.4) + $lastTicker->sell_four_ema;
+				$fourEMA = (($t->ask - $lastTicker->buy_four_ema)*.4) + $lastTicker->sell_four_ema;
 				$t->sell_four_ema = $fourEMA;
 			}
 			

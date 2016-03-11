@@ -39,10 +39,8 @@ class HomeController extends Controller
 				$data[$i]['sell_four_prcnt_diff'] = '';
 			}
 			
-			if(sizeOf($tickersArr) >= 4){
-				$prevBuyFourEMA = $ticker['buy_four_ema'];
-				$prevSellFourEMA = $ticker['sell_four_ema'];
-			}
+			$prevBuyFourEMA = $ticker['buy_four_ema'];
+			$prevSellFourEMA = $ticker['sell_four_ema'];
 		$i++;
 		}
 		return view('home')->with('data', $data);
