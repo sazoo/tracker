@@ -26,8 +26,8 @@ class HomeController extends Controller
 			$data[$i]['sell_four_ema'] = $ticker['sell_four_ema'];
 			$data[$i]['gain'] = $ticker['gain'];
 			$data[$i]['loss'] = $ticker['loss'];
-			$data[$i]['buy_four_prcnt_diff'] = $ticker['buy_four_prcnt_diff'];
-			$data[$i]['sell_four_prcnt_diff'] = $ticker['sell_four_prcnt_diff'];;
+			$data[$i]['buy_four_prcnt_diff'] = $ticker['buy_four_diff'];
+			$data[$i]['sell_four_prcnt_diff'] = $ticker['sell_four_diff'];;
 			
 		$i++;
 		}
