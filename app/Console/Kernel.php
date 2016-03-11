@@ -93,9 +93,9 @@ class Kernel extends ConsoleKernel
 				}
 				
 				if($t->ask > $lastTicker->ask){
-					$t->gain = 0;
+					$t->loss = 0;
 				}else{
-					$t->gain = $t->ask;
+					$t->loss = $t->ask;
 					
 				}
 			}
