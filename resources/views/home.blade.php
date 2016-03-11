@@ -74,8 +74,8 @@
 		  <td></td>
 		  <td></td>
 		  <td></td>
-		  <td></td>
-		  <td></td>
+		  <td>{{ $d['gain']}}</td>
+		  <td>{{ $d['loss']}}</td>
 		  <td></td>
 		  <td></td>
 		  <td></td>
