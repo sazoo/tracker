@@ -17,13 +17,13 @@
 			  background-color: #70c469;
 			  color: white;
 			  font-weight: normal;
-			  padding: 20px 30px;
+			  padding: 5px 5px;
 			  text-align: center;
 			}
 			.flat-table td {
 			  background-color: #eeeeee;
 			  color: #6f6f6f;
-			  padding: 10px 20px;
+			  padding: 5px 5px;
 			}
 
 

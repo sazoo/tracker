@@ -159,8 +159,8 @@ class Kernel extends ConsoleKernel
 			}
 			
 			//compute RSI
-			if($tickersCount > 6){
-				$t->rsi = 100 - (100/(1 + ($t->ave_gain - $t->ave_loss)));
+			if($tickersCount >= 6){
+				$t->rsi = 100 - (100/(1 + ($t->ave_gain/$t->ave_loss)));
 			}
 			
 			//compute diff four
