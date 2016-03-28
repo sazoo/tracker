@@ -64,10 +64,12 @@
 			<script type="text/javascript">
 
 			$(function() {
-
+//--------------------------BUY --------------------------------
 				var d1 = [];
+				var d2 = [];
 				var date = '';
 				var buyFour = '';
+				var buyTwentyFour = '';
 				var i = 0;
 				var x = 0;
 				var options = '';
@@ -76,21 +78,54 @@
 				@foreach($data as $d)
 					
 					buyFour = '<?php echo $d['buy_four_ema']  ?>';
+					buyTwentyFour = '<?php echo $d['buy_twenty_four_ema']  ?>';
 					d1.push([i, buyFour]);
+					d2.push([i, buyTwentyFour])
 					i++;
 				@endforeach
 				
 				<?php 
 					$data->sortBy('buy_four_ema');
 				?>
-				minValue = '<?php echo $data->first()['buy_four_ema'] - 50; ?>'
-				maxValue = '<?php echo $data->last()['buy_four_ema'] + 50; ?>'
+				minValue = '<?php echo $data->first()['buy_twenty_four_ema'] - 50; ?>'
+				maxValue = '<?php echo $data->last()['buy_twenty_four_ema'] + 50; ?>'
 				
 				var chartOptions = {
 					xaxis: { ticks:24},
-					yaxis: {tickSize:20, min:minValue}
+					yaxis: {tickSize:50, min:minValue}
 				};
-				$.plot("#buy-placeholder", [ d1 ], chartOptions);
+				$.plot("#buy-placeholder", [ d1, d2 ], chartOptions);
+		//--------------------------------SELL----------------------------------		
+				var d1 = [];
+				var d2 = [];
+				var date = '';
+				var sellFour = '';
+				var sellTwentyFour = '';
+				var i = 0;
+				var x = 0;
+				var options = '';
+				var minValue = '';
+				var maxValue = '';
+				@foreach($data as $d)
+					
+					buyFour = '<?php echo $d['sell_four_ema']  ?>';
+					buyTwentyFour = '<?php echo $d['sell_twenty_four_ema']  ?>';
+					d1.push([i, buyFour]);
+					d2.push([i, buyTwentyFour])
+					i++;
+				@endforeach
+				
+				<?php 
+					$data->sortBy('sell_four_ema');
+				?>
+				minValue = '<?php echo $data->first()['sell_twenty_four_ema'] - 50; ?>'
+				maxValue = '<?php echo $data->last()['sell_twenty_four_ema'] + 50; ?>'
+				
+				var chartOptions = {
+					xaxis: { ticks:24},
+					yaxis: {tickSize:50, min:minValue}
+				};
+				$.plot("#sell-placeholder", [ d1, d2 ], chartOptions);
 
 			});
 
@@ -151,7 +186,12 @@
 	</table>
 	</div>
 	<div class="container">
+	BUY
 		<div id="buy-placeholder" class="placeholder"></div>
+	</div>
+	<div class="container">
+	SELL
+		<div id="sell-placeholder" class="placeholder"></div>
 	</div>
 	</body>
 </html>
