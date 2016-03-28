@@ -105,7 +105,7 @@ class Kernel extends ConsoleKernel
 				foreach($tickers as $ticker){
 					$twentyFourEMA = $twentyFourEMA + $ticker->ask;
 				}
-				$t->sell_twenty_four_ema = ($t->ask + $twentyFourEMA)/4;
+				$t->sell_twenty_four_ema = ($t->ask + $twentyFourEMA)/24;
 			}else{
 				$twentyFourEMA = (($t->ask - $lastTicker->sell_twenty_four_ema)*.08) + $lastTicker->sell_twenty_four_ema;
 				$t->sell_twenty_four_ema = $twentyFourEMA;
@@ -192,6 +192,6 @@ class Kernel extends ConsoleKernel
 							  'new_ticker', 
 							  array('text' => $t->toJson()));
 			
-        })->hourly();
+        })->everyMinute();
     }
 }

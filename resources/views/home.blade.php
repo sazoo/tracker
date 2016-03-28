@@ -25,15 +25,79 @@
 			  color: #6f6f6f;
 			  padding: 5px 5px;
 			}
+			
+			.container {
+	box-sizing: border-box;
+	width: 1000px;
+	height: 450px;
+	padding: 20px 15px 15px 15px;
+	margin: 15px auto 30px auto;
+	border: 1px solid #ddd;
+	background: #fff;
+	background: linear-gradient(#f6f6f6 0, #fff 50px);
+	background: -o-linear-gradient(#f6f6f6 0, #fff 50px);
+	background: -ms-linear-gradient(#f6f6f6 0, #fff 50px);
+	background: -moz-linear-gradient(#f6f6f6 0, #fff 50px);
+	background: -webkit-linear-gradient(#f6f6f6 0, #fff 50px);
+	box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+	-o-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+	-ms-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+	-moz-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+	-webkit-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.placeholder {
+	width: 100%;
+	height: 100%;
+	font-size: 14px;
+	line-height: 1.2em;
+}
 
 
 		</style>
 		<!--[if lt IE 9]>
 		<script type="text/javascript" src="js/respond.min.js"></script>
 		<![endif]-->
+		<script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	<script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.js"></script>
 			
+			<script type="text/javascript">
+
+			$(function() {
+
+				var d1 = [];
+				var date = '';
+				var buyFour = '';
+				var i = 0;
+				var x = 0;
+				var options = '';
+				var minValue = '';
+				var maxValue = '';
+				@foreach($data as $d)
+					
+					buyFour = '<?php echo $d['buy_four_ema']  ?>';
+					d1.push([i, buyFour]);
+					i++;
+				@endforeach
+				
+				<?php 
+					$data->sortBy('buy_four_ema');
+				?>
+				minValue = '<?php echo $data->first()['buy_four_ema'] - 50; ?>'
+				maxValue = '<?php echo $data->last()['buy_four_ema'] + 50; ?>'
+				
+				var chartOptions = {
+					xaxis: { ticks:24},
+					yaxis: {tickSize:20, min:minValue}
+				};
+				$.plot("#buy-placeholder", [ d1 ], chartOptions);
+
+			});
+
+			</script>
 	</head>	
 	<body data-color="grey" class="flat">
+	<div>
 	<table class="flat-table" id="dataTable">
 		<thead>
 			<tr>
@@ -64,18 +128,18 @@
 	  <tbody>
 		@foreach($data as $d)
 		<tr>
-		  <td>{{ date('m/d/Y', strtotime($d['date']))}}</td>
-		  <td>{{ date('H:i', strtotime($d['date']))}}</td>
-		  <td>{{ $d['buy_current']}}</td>
+		  <td>{{ date('m/d/Y', strtotime($d['created_at']))}}</td>
+		  <td>{{ date('H:i', strtotime($d['created_at']))}}</td>
+		  <td>{{ $d['bid']}}</td>
 		  <td>{{ $d['buy_four_ema']}}</td>
-		  <td>{{ $d['buy_four_prcnt_diff']}}</td>
+		  <td>{{ $d['buy_four_diff']}}</td>
 		  <td>{{ $d['buy_twenty_four_ema']}}</td>
-		  <td>{{ $d['buy_twenty_four_prcnt_diff']}}</td>
-		  <td>{{ $d['sell_current']}}</td>
+		  <td>{{ $d['buy_twenty_four_diff']}}</td>
+		  <td>{{ $d['ask']}}</td>
 		  <td>{{ $d['sell_four_ema']}}</td>
-		  <td>{{ $d['sell_four_prcnt_diff']}}</td>
+		  <td>{{ $d['sell_four_diff']}}</td>
 		  <td>{{ $d['sell_twenty_four_ema']}}</td>
-		  <td>{{ $d['sell_twenty_four_prcnt_diff']}}</td>
+		  <td>{{ $d['sell_twenty_four_diff']}}</td>
 		  <td>{{ $d['gain']}}</td>
 		  <td>{{ $d['loss']}}</td>
 		  <td>{{ $d['ave_gain']}}</td>
@@ -85,5 +149,9 @@
 		@endforeach
 	  </tbody>
 	</table>
+	</div>
+	<div class="container">
+		<div id="buy-placeholder" class="placeholder"></div>
+	</div>
 	</body>
 </html>
