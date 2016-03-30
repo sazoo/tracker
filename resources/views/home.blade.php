@@ -58,8 +58,9 @@
 		<!--[if lt IE 9]>
 		<script type="text/javascript" src="js/respond.min.js"></script>
 		<![endif]-->
-		<script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-	<script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.js"></script>
+		<!--<script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	<script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.js"></script>-->
+	<script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 			
 			<script type="text/javascript">
 
@@ -185,13 +186,107 @@
 	  </tbody>
 	</table>
 	</div>
-	<div class="container">
-	BUY
-		<div id="buy-placeholder" class="placeholder"></div>
+	<div>
+	<h2 class="title">Buy Chart</h2>
+		<canvas id="buy" width="1200" height="400"></canvas>
+    <div id="legendDiv">
+		Legend
+		<h4><span style="color: rgba(255,0,0,1)">4-EMA</span></h1>
+		<h4><span style="color: rgba(0,0,255,1)">24-EMA</span></h1>
+	</div>
+	</div>
+	<div>
+	<h2 class="title">Sell Chart</h2>
+		<canvas id="sell" width="1200" height="400"></canvas>
+    <div id="legendDiv">
+		Legend
+		<h4><span style="color: rgba(255,0,0,1)">4-EMA</span></h1>
+		<h4><span style="color: rgba(0,0,255,1)">24-EMA</span></h1>
+	</div>
+	</div>
+		<!--<div id="buy-placeholder" class="placeholder"></div>
 	</div>
 	<div class="container">
 	SELL
 		<div id="sell-placeholder" class="placeholder"></div>
-	</div>
+	</div>-->
+	<script>
+			var label = new Array();
+			var fourHrData = new Array();
+			var twentyFourHrData = new Array();
+			@foreach($data as $d)
+				var dateLabel = '';
+					dateLabel = '<?php echo date('m/d/Y', strtotime($d['created_at'])) . ' ' .  date('H:i', strtotime($d['created_at'])) ?>';
+					label.push(dateLabel);
+					fourHrData.push(<?php echo $d['buy_four_ema'] ?>);
+					twentyFourHrData.push(<?php echo $d['buy_twenty_four_ema'] ?>);
+			@endforeach
+			var buyData = {
+			labels : label,
+			datasets : [
+				{
+					label: "4-EMA",
+					fillColor: "rgba(220,220,220,0)",
+					strokeColor: "rgba(255,0,0,1)",
+					pointColor: "rgba(255,0,0,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220,220,220,1)",
+					data : fourHrData
+				},
+				{
+					label: "24-EMA",
+					fillColor: "rgba(220,220,220,0)",
+					strokeColor: "rgba(0,0,255,1)",
+					pointColor: "rgba(0,0,255,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(151,187,205,1)",
+					data : twentyFourHrData
+				}
+			]
+		}
+		var buy = document.getElementById('buy').getContext('2d');
+		var myLineChart = new Chart(buy).Line(buyData);
+	</script>
+	<script>
+			var label = new Array();
+			var fourHrData = new Array();
+			var twentyFourHrData = new Array();
+			@foreach($data as $d)
+				var dateLabel = '';
+					dateLabel = '<?php echo date('m/d/Y', strtotime($d['created_at'])) . ' ' .  date('H:i', strtotime($d['created_at'])) ?>';
+					label.push(dateLabel);
+					fourHrData.push(<?php echo $d['sell_four_ema'] ?>);
+					twentyFourHrData.push(<?php echo $d['sell_twenty_four_ema'] ?>);
+			@endforeach
+			var sellData = {
+			labels : label,
+			datasets : [
+				{
+					label: "4-EMA",
+					fillColor: "rgba(220,220,220,0)",
+					strokeColor: "rgba(255,0,0,1)",
+					pointColor: "rgba(255,0,0,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220,220,220,1)",
+					data : fourHrData
+				},
+				{
+					label: "24-EMA",
+					fillColor: "rgba(220,220,220,0)",
+					strokeColor: "rgba(0,0,255,1)",
+					pointColor: "rgba(0,0,255,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(151,187,205,1)",
+					data : twentyFourHrData
+				}
+			]
+		}
+		var sell = document.getElementById('sell').getContext('2d');
+		var myLineChart = new Chart(sell).Line(sellData);
+	</script>
 	</body>
 </html>
