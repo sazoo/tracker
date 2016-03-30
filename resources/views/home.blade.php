@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Unicorn Admin</title>
+		<title>DOMS TRACKER</title>
 		<meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<style>
@@ -53,84 +53,44 @@
 	line-height: 1.2em;
 }
 
-
 		</style>
+		  <script src="https://js.pusher.com/3.0/pusher.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+		<script>
+
+    var pusher = new Pusher('c0c865e8f51359971d4f', {
+      encrypted: true
+    });
+    var channel = pusher.subscribe('ticker');
+    channel.bind('new_ticker', function(data) {
+		var parsed = JSON.parse(data.text);
+		
+		var arr = [];
+
+		for(var x in parsed){
+		  arr.push(parsed[x]);
+		}
+      document.getElementById("dataTable").deleteRow(2);
+	  
+	  
+	  var date = new Date(parsed.created_at);
+	  var trHTML = '';
+	  //$.each(parsed, function (i, item) {
+            trHTML += '<tr><td>' + date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear() + '</td><td>' + date.getHours + ':' + date.getMinutes() + '</td><td>' + 
+			parsed.bid + '</td><td>' + parsed.buy_four_ema + '</td><td>' + parsed.buy_four_diff + '</td><td>' + parsed.buy_twenty_four_ema + '</td><td>' + 
+			parsed.buy_twenty_four_diff + '</td><td>' + parsed.ask + '</td><td>' + parsed.sell_four_ema + '</td><td>' + parsed.sell_four_diff + '</td><td>' + 
+			parsed.sell_twenty_four_ema + '</td><td>' + parsed.sell_twenty_four_diff + '</td><td>' + parsed.gain + '</td><td> + 'parsed.loss + '</td><td>' +
+			parsed.ave_gain + '</td><td>' + parsed.ave_loss + '</td><td>' + parsed.rsi + '</td></tr>';
+       // });
+        $('#ticker').append(trHTML);
+	});
+  </script>
 		<!--[if lt IE 9]>
 		<script type="text/javascript" src="js/respond.min.js"></script>
 		<![endif]-->
-		<!--<script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-	<script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.js"></script>-->
 	<script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 			
-			<script type="text/javascript">
-
-			$(function() {
-//--------------------------BUY --------------------------------
-				var d1 = [];
-				var d2 = [];
-				var date = '';
-				var buyFour = '';
-				var buyTwentyFour = '';
-				var i = 0;
-				var x = 0;
-				var options = '';
-				var minValue = '';
-				var maxValue = '';
-				@foreach($data as $d)
-					
-					buyFour = '<?php echo $d['buy_four_ema']  ?>';
-					buyTwentyFour = '<?php echo $d['buy_twenty_four_ema']  ?>';
-					d1.push([i, buyFour]);
-					d2.push([i, buyTwentyFour])
-					i++;
-				@endforeach
-				
-				<?php 
-					$data->sortBy('buy_four_ema');
-				?>
-				minValue = '<?php echo $data->first()['buy_twenty_four_ema'] - 50; ?>'
-				maxValue = '<?php echo $data->last()['buy_twenty_four_ema'] + 50; ?>'
-				
-				var chartOptions = {
-					xaxis: { ticks:24},
-					yaxis: {tickSize:50, min:minValue}
-				};
-				$.plot("#buy-placeholder", [ d1, d2 ], chartOptions);
-		//--------------------------------SELL----------------------------------		
-				var d1 = [];
-				var d2 = [];
-				var date = '';
-				var sellFour = '';
-				var sellTwentyFour = '';
-				var i = 0;
-				var x = 0;
-				var options = '';
-				var minValue = '';
-				var maxValue = '';
-				@foreach($data as $d)
-					
-					buyFour = '<?php echo $d['sell_four_ema']  ?>';
-					buyTwentyFour = '<?php echo $d['sell_twenty_four_ema']  ?>';
-					d1.push([i, buyFour]);
-					d2.push([i, buyTwentyFour])
-					i++;
-				@endforeach
-				
-				<?php 
-					$data->sortBy('sell_four_ema');
-				?>
-				minValue = '<?php echo $data->first()['sell_twenty_four_ema'] - 50; ?>'
-				maxValue = '<?php echo $data->last()['sell_twenty_four_ema'] + 50; ?>'
-				
-				var chartOptions = {
-					xaxis: { ticks:24},
-					yaxis: {tickSize:50, min:minValue}
-				};
-				$.plot("#sell-placeholder", [ d1, d2 ], chartOptions);
-
-			});
-
-			</script>
+			
 	</head>	
 	<body data-color="grey" class="flat">
 	<div>
@@ -185,6 +145,89 @@
 		@endforeach
 	  </tbody>
 	</table>
+	</div>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th colspan="4">4-EMA Trend</th>
+				</tr>
+				<tr>
+					<th></th>
+					<th>% Diff Signal</th>
+					<th>Current Trend</th>
+					<th>Order</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Buy</td>
+					<td><input type="text"></td>
+					<td></td>
+					<td>SELL!!!!</td>
+				</tr>
+				<tr>
+					<td>Sell</td>
+					<td><input type="text"></td>
+					<td></td>
+					<td>BUY!!!!</td>
+				</tr>
+			</tbody>
+		</table>
+		<table>
+			<thead>
+				<tr>
+					<th colspan="4">Resistance/Support</th>
+				</tr>
+				<tr>
+					<th></th>
+					<th>Limits</th>
+					<th>Current Value</th>
+					<th>Order</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Buy</td>
+					<td><input type="text"></td>
+					<td></td>
+					<td>SELL!!!!</td>
+				</tr>
+				<tr>
+					<td>Sell</td>
+					<td><input type="text"></td>
+					<td></td>
+					<td>BUY!!!!</td>
+				</tr>
+			</tbody>
+		</table>
+		<table>
+			<thead>
+				<tr>
+					<th colspan="4">Stop-Loss</th>
+				</tr>
+				<tr>
+					<th></th>
+					<th>Limits</th>
+					<th>Current Value</th>
+					<th>Order</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Buy</td>
+					<td><input type="text"></td>
+					<td></td>
+					<td>SELL!!!!</td>
+				</tr>
+				<tr>
+					<td>Sell</td>
+					<td><input type="text"></td>
+					<td></td>
+					<td>BUY!!!!</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 	<div>
 	<h2 class="title">Buy Chart</h2>
