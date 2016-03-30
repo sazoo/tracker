@@ -203,6 +203,13 @@
 		<h4><span style="color: rgba(255,0,0,1)">4-EMA</span></h1>
 		<h4><span style="color: rgba(0,0,255,1)">24-EMA</span></h1>
 	</div>
+	</div><div>
+	<h2 class="title">RSI Chart</h2>
+		<canvas id="rsi" width="1200" height="400"></canvas>
+    <div id="legendDiv">
+		Legend
+		<h4><span style="color: rgba(255,0,0,1)">RSI</span></h1>
+	</div>
 	</div>
 		<!--<div id="buy-placeholder" class="placeholder"></div>
 	</div>
@@ -287,6 +294,33 @@
 		}
 		var sell = document.getElementById('sell').getContext('2d');
 		var myLineChart = new Chart(sell).Line(sellData);
+	</script>
+	<script>
+			var label = new Array();
+			var rsi = new Array();
+			@foreach($data as $d)
+				var dateLabel = '';
+					dateLabel = '<?php echo date('m/d/Y', strtotime($d['created_at'])) . ' ' .  date('H:i', strtotime($d['created_at'])) ?>';
+					label.push(dateLabel);
+					rsi.push(<?php echo $d['rsi'] ?>);
+			@endforeach
+			var rsiData = {
+			labels : label,
+			datasets : [
+				{
+					label: "RSI",
+					fillColor: "rgba(220,220,220,0)",
+					strokeColor: "rgba(255,0,0,1)",
+					pointColor: "rgba(255,0,0,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220,220,220,1)",
+					data : rsi
+				}
+			]
+		}
+		var rsi = document.getElementById('rsi').getContext('2d');
+		var myLineChart = new Chart(rsi).Line(rsiData);
 	</script>
 	</body>
 </html>
