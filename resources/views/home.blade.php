@@ -82,7 +82,7 @@
 			parsed.sell_twenty_four_ema + '</td><td>' + parsed.sell_twenty_four_diff + '</td><td>' + parsed.gain + '</td><td> + 'parsed.loss + '</td><td>' +
 			parsed.ave_gain + '</td><td>' + parsed.ave_loss + '</td><td>' + parsed.rsi + '</td></tr>';
        // });
-        $('#ticker').append(trHTML);
+        $('#dataTable').append(trHTML);
 	});
   </script>
 		<!--[if lt IE 9]>
