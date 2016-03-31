@@ -79,10 +79,14 @@
             trHTML += '<tr><td>' + date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear() + '</td><td>' + date.getHours + ':' + date.getMinutes() + '</td><td>' + 
 			parsed.bid + '</td><td>' + parsed.buy_four_ema + '</td><td>' + parsed.buy_four_diff + '</td><td>' + parsed.buy_twenty_four_ema + '</td><td>' + 
 			parsed.buy_twenty_four_diff + '</td><td>' + parsed.ask + '</td><td>' + parsed.sell_four_ema + '</td><td>' + parsed.sell_four_diff + '</td><td>' + 
-			parsed.sell_twenty_four_ema + '</td><td>' + parsed.sell_twenty_four_diff + '</td><td>' + parsed.gain + '</td><td> + 'parsed.loss + '</td><td>' +
+			parsed.sell_twenty_four_ema + '</td><td>' + parsed.sell_twenty_four_diff + '</td><td>' + parsed.gain + '</td><td>' + parsed.loss + '</td><td>' +
 			parsed.ave_gain + '</td><td>' + parsed.ave_loss + '</td><td>' + parsed.rsi + '</td></tr>';
        // });
         $('#dataTable').append(trHTML);
+		
+		if(parsed.buy_four_diff < document.getElementById("4_ema_buy_text")){
+			document.getElementById("4ema_sell").
+		}
 	});
   </script>
 		<!--[if lt IE 9]>
@@ -162,15 +166,15 @@
 			<tbody>
 				<tr>
 					<td>Buy</td>
-					<td><input type="text"></td>
+					<td><input type="text" id="4_ema_buy_text"></td>
 					<td></td>
-					<td>SELL!!!!</td>
+					<td id="4ema_sell">SELL!!!!</td>
 				</tr>
 				<tr>
 					<td>Sell</td>
-					<td><input type="text"></td>
+					<td><input type="text" id="4_ema_sell_text"></td>
 					<td></td>
-					<td>BUY!!!!</td>
+					<td id="4ema_buy">BUY!!!!</td>
 				</tr>
 			</tbody>
 		</table>
@@ -191,13 +195,13 @@
 					<td>Buy</td>
 					<td><input type="text"></td>
 					<td></td>
-					<td>SELL!!!!</td>
+					<td id="res_sell">SELL!!!!</td>
 				</tr>
 				<tr>
 					<td>Sell</td>
 					<td><input type="text"></td>
 					<td></td>
-					<td>BUY!!!!</td>
+					<td id="res_buy">BUY!!!!</td>
 				</tr>
 			</tbody>
 		</table>
@@ -218,13 +222,13 @@
 					<td>Buy</td>
 					<td><input type="text"></td>
 					<td></td>
-					<td>SELL!!!!</td>
+					<td id="sl_sell">SELL!!!!</td>
 				</tr>
 				<tr>
 					<td>Sell</td>
 					<td><input type="text"></td>
 					<td></td>
-					<td>BUY!!!!</td>
+					<td id="sl_buy">BUY!!!!</td>
 				</tr>
 			</tbody>
 		</table>
