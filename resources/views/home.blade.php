@@ -90,7 +90,11 @@
 		if(parsed.buy_four_diff > document.getElementById("4_ema_sell_text")){
 			document.getElementById("4ema_buy").style.display = 'block';
 		}
-	});
+		
+		buyChart.addData(parsed.buy_four_ema, addZ(date.getMonth() + 1) + '/' + addZ(date.getDate()) + '/' + date.getFullYear() +  addZ(date.getHours()) + ':' + addZ(date.getMinutes());
+	  // Remove the first point so we dont just add values forever
+	  buyChart.removeData();
+		});
 	
 	function addZ(n){return n<10? '0'+n:''+n;}
   </script>
@@ -306,7 +310,7 @@
 			]
 		}
 		var buy = document.getElementById('buy').getContext('2d');
-		var myLineChart = new Chart(buy).Line(buyData);
+		var buyChart = new Chart(buy).Line(buyData);
 	</script>
 	<script>
 			var label = new Array();
@@ -345,7 +349,7 @@
 			]
 		}
 		var sell = document.getElementById('sell').getContext('2d');
-		var myLineChart = new Chart(sell).Line(sellData);
+		var sellChart = new Chart(sell).Line(sellData);
 	</script>
 	<script>
 			var label = new Array();
@@ -372,7 +376,7 @@
 			]
 		}
 		var rsi = document.getElementById('rsi').getContext('2d');
-		var myLineChart = new Chart(rsi).Line(rsiData);
+		var rsiChart = new Chart(rsi).Line(rsiData);
 	</script>
 	</body>
 </html>
