@@ -85,7 +85,10 @@
         $('#dataTable').append(trHTML);
 		
 		if(parsed.buy_four_diff < document.getElementById("4_ema_buy_text")){
-			document.getElementById("4ema_sell").
+			document.getElementById("4ema_sell").style.display = 'block';
+		}
+		if(parsed.buy_four_diff > document.getElementById("4_ema_sell_text")){
+			document.getElementById("4ema_buy").style.display = 'block';
 		}
 	});
   </script>
@@ -168,13 +171,13 @@
 					<td>Buy</td>
 					<td><input type="text" id="4_ema_buy_text"></td>
 					<td></td>
-					<td id="4ema_sell">SELL!!!!</td>
+					<td id="4ema_sell" style="display: none">SELL!!!!</td>
 				</tr>
 				<tr>
 					<td>Sell</td>
 					<td><input type="text" id="4_ema_sell_text"></td>
 					<td></td>
-					<td id="4ema_buy">BUY!!!!</td>
+					<td id="4ema_buy" style="display: none">BUY!!!!</td>
 				</tr>
 			</tbody>
 		</table>
