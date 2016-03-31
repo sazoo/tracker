@@ -76,7 +76,7 @@
 	  var date = new Date(parsed.created_at);
 	  var trHTML = '';
 	  //$.each(parsed, function (i, item) {
-            trHTML += '<tr><td>' + addZ(date.getMonth() + 1) + '/' + addZ(date.getDate()) + '/' + date.getFullYear() + '</td><td>' + date.getHours + ':' + date.getMinutes() + '</td><td>' + 
+            trHTML += '<tr><td>' + addZ(date.getMonth() + 1) + '/' + addZ(date.getDate()) + '/' + date.getFullYear() + '</td><td>' + addZ(date.getHours()) + ':' + addZ(date.getMinutes()) + '</td><td>' + 
 			parsed.bid + '</td><td>' + parsed.buy_four_ema + '</td><td>' + parsed.buy_four_diff + '</td><td>' + parsed.buy_twenty_four_ema + '</td><td>' + 
 			parsed.buy_twenty_four_diff + '</td><td>' + parsed.ask + '</td><td>' + parsed.sell_four_ema + '</td><td>' + parsed.sell_four_diff + '</td><td>' + 
 			parsed.sell_twenty_four_ema + '</td><td>' + parsed.sell_twenty_four_diff + '</td><td>' + parsed.gain + '</td><td>' + parsed.loss + '</td><td>' +
