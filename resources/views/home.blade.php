@@ -91,7 +91,7 @@
 			document.getElementById("4ema_buy").style.display = 'block';
 		}
 		
-		buyChart.addData(parsed.buy_four_ema, addZ(date.getMonth() + 1) + '/' + addZ(date.getDate()) + '/' + date.getFullYear() +  addZ(date.getHours()) + ':' + addZ(date.getMinutes());
+		buyChart.addData(parsed.buy_four_ema, addZ(date.getMonth() + 1) + '/' + addZ(date.getDate()) + '/' + date.getFullYear() +  addZ(date.getHours()) + ':' + addZ(date.getMinutes()));
 	  // Remove the first point so we dont just add values forever
 	  buyChart.removeData();
 		});
