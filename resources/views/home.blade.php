@@ -76,7 +76,7 @@
 	  var date = new Date(parsed.created_at);
 	  var trHTML = '';
 	  //$.each(parsed, function (i, item) {
-            trHTML += '<tr><td>' + date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear() + '</td><td>' + date.getHours + ':' + date.getMinutes() + '</td><td>' + 
+            trHTML += '<tr><td>' + addZ(date.getMonth() + 1) + '/' + addZ(date.getDate()) + '/' + date.getFullYear() + '</td><td>' + date.getHours + ':' + date.getMinutes() + '</td><td>' + 
 			parsed.bid + '</td><td>' + parsed.buy_four_ema + '</td><td>' + parsed.buy_four_diff + '</td><td>' + parsed.buy_twenty_four_ema + '</td><td>' + 
 			parsed.buy_twenty_four_diff + '</td><td>' + parsed.ask + '</td><td>' + parsed.sell_four_ema + '</td><td>' + parsed.sell_four_diff + '</td><td>' + 
 			parsed.sell_twenty_four_ema + '</td><td>' + parsed.sell_twenty_four_diff + '</td><td>' + parsed.gain + '</td><td>' + parsed.loss + '</td><td>' +
@@ -91,6 +91,8 @@
 			document.getElementById("4ema_buy").style.display = 'block';
 		}
 	});
+	
+	function addZ(n){return n<10? '0'+n:''+n;}
   </script>
 		<!--[if lt IE 9]>
 		<script type="text/javascript" src="js/respond.min.js"></script>
